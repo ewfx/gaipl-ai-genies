@@ -2,10 +2,9 @@ import os
 import pandas as pd
 import numpy as np
 import streamlit as st
-import time
 import storage_db as sd
 import invoke_llm as llm
-from load_data import get_sample_questions, load_data
+from load_data import load_data
 from storage_db import store_data_in_chromadb
 from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
@@ -24,9 +23,7 @@ st.set_page_config(
     page_icon="🤖",
     layout="centered"
 )
-# Streamlit app title
-# if 'chat_history' not in st.session_state:
-#     st.session_state.chat_history = []
+
 if 'user_input' not in st.session_state:
     st.session_state['user_input'] = []
 if 'openai_response' not in st.session_state:
@@ -52,45 +49,13 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# main_placfolder = st.empty()
-# print (os.environ["GEMINI_API_KEY"])
 
-# # Sidebar tool selection
-# tool = st.sidebar.selectbox("Select Tool:", ("Gemini", "OpenAI"))
-# if tool:
-#     st.header(tool)
-#     main_placfolder.text("Loading...")
-    
-#     start = time.time()
-#     main_placfolder.text("Loading dataset ..")
-    
-#     # Load dataset
 with st.spinner('Loading dataset...'):
     df = load_data('data/incidents_dataset.csv')
     
 #     # Store data in ChromaDB
 with st.spinner('Generating embeddings and storing local...'):
     collection = store_data_in_chromadb(df, embedding_model)
-#     # main_placfolder.clear()
-#     # Query input
-#     # query = st.text_input("Enter your query here:")
-#     query = st.selectbox("Choose a common IT issue or type your own", get_sample_questions())
-#     if st.button("Get Resolution"):
-#       if query:
-#         main_placfolder.text("Processing your query ...")
-        
-#         # Generate resolution steps
-#         response = llm.generate_resolution_steps(query, embedding_model, collection)
-        
-#         end = time.time()
-#         st.text(f"Time taken: {end - start}")
-        
-#         st.subheader("Suggested solution:")        
-#         st.write(response)
-        
-#         st.text(" ******* Thank you and happy querying *******")
-#         st.balloons()
-
 
 def main():
     st.title("🤖 Welcome to ECM AI Chatbot")
