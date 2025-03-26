@@ -1,0 +1,13 @@
+langchain==0.0.36
+streamlit==1.44.0
+protobuf~=3.19.0
+python-dotenv
+langchain_experimental
+langchain_community
+langchain-cli
+sentence-transformers
+chromadb
+google-generativeai
+pandas
+streamlit-chat
+
