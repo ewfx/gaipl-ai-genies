@@ -3,5 +3,7 @@ Replace this file with a document that describes the architecture and design of 
     - A document in pdf or md format that describes your solution
 
  ![alt text](image.png)
- ![alt text](image-2.png)
+ 
  ![alt text](image-1.png)
+
+ ![alt text](image-2.png)
